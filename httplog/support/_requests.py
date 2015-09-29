@@ -8,7 +8,8 @@ import logging
 
 from requests import sessions, models
 
-LOG = logging.getLogger('httplog')
+LOG_REQ = logging.getLogger('HTTP_REQ')
+LOG_RESP = logging.getLogger('HTTP_RESP')
 
 
 class Session(sessions.Session):
@@ -44,9 +45,9 @@ class Session(sessions.Session):
         prep = self.prepare_request(req)
 
         if prep.method in ['GET']:
-            LOG.info("curl -X %s '%s'" % (prep.method, prep.url))
+            LOG_REQ.info("curl -X %s '%s'" % (prep.method, prep.url))
         else:
-            LOG.info("curl -X %s '%s' -d '%s'" % (
+            LOG_REQ.info("curl -X %s '%s' -d '%s'" % (
                 prep.method, prep.url, prep.body))
         response = super(Session, self).request(
             method, url,
@@ -64,5 +65,5 @@ class Session(sessions.Session):
             verify=verify,
             cert=cert,
             json=json)
-        LOG.info('Resp(%s): %s' % (response.status_code, response.text))
+        LOG_RESP.info('Resp(%s): %s' % (response.status_code, response.text))
         return response

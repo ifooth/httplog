@@ -18,16 +18,33 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        'file': {
+        'smart_req': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': '/var/log/httplog.log',
             'formatter': 'simple'
-        }
+        },
+        'smart_resp': {
+            'level': 'DEBUG',
+            'class': 'httplog.log.SmartRespHandler',
+            'filename': '/var/log/httplog.log',
+            'formatter': 'simple'
+        },
+        'detail': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/httplog.log.detail',
+            'formatter': 'simple'
+        },
     },
     'loggers': {
-        'httplog': {
-            'handlers': ['file'],
+        'HTTP_REQ': {
+            'handlers': ['detail', 'smart_req'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'HTTP_RESP': {
+            'handlers': ['detail', 'smart_resp'],
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -36,7 +53,7 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
-__VERSION__ = '1.1'
+__VERSION__ = '1.2'
 
 try:
     from httplog import patcher
