@@ -18,9 +18,9 @@ class Http(httplib2.Http):
         """添加LOG
         """
         if body:
-            LOG.info("curl -X %s %s -d '%s' " % (method, uri, body))
+            LOG.info("curl -X %s '%s' -d '%s' " % (method, uri, body))
         else:
-            LOG.info("curl -X %s %s" % (method, uri))
+            LOG.info("curl -X %s '%s'" % (method, uri))
         response, content = super(Http, self).request(
             uri, method, body, headers, redirections,
             connection_type, **kwargs)
