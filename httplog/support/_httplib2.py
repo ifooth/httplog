@@ -25,5 +25,5 @@ class Http(httplib2.Http):
         response, content = super(Http, self).request(
             uri, method, body, headers, redirections,
             connection_type, **kwargs)
-        LOG_RESP.info('Resp: %s' % response)
+        LOG_RESP.info('Resp(%s): %s' % (response.status, content))
         return (response, content)

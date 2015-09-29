@@ -53,7 +53,7 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
-__VERSION__ = '1.2'
+__VERSION__ = '1.2.1'
 
 try:
     from httplog import patcher
