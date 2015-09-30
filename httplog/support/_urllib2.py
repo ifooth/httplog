@@ -3,8 +3,8 @@
 # Author: Joe Lei <joelei@tencent.com>
 """urllib2 urlopen支持"""
 from __future__ import absolute_import
-import logging
 from functools import wraps
+import logging
 
 LOG_REQ = logging.getLogger('HTTP_REQ')
 LOG_RESP = logging.getLogger('HTTP_RESP')
