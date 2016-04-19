@@ -11,10 +11,4 @@ ChangeLog
 dist
 *.egg
 *.eggs
-autoscan/versioninfo
-doc/source/api/autoscan.*.rst
-doc/source/api/tests.*.rst
-doc/source/api/autoindex.rst
-doc/source/sourcecode
 *.mo
-*.log

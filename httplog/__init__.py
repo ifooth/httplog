@@ -2,7 +2,7 @@
 # Copyright 2015 Tencent
 # Author: Joe Lei <joelei@tencent.com>
 import logging.config
-
+import os.path
 
 LOGGING = {
     'version': 1,
@@ -21,19 +21,19 @@ LOGGING = {
         'smart_req': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/httplog.log',
+            'filename': os.path.expanduser('~') + '/.logs/httplog.log',
             'formatter': 'simple'
         },
         'smart_resp': {
             'level': 'DEBUG',
             'class': 'httplog.log.SmartRespHandler',
-            'filename': '/var/log/httplog.log',
+            'filename': os.path.expanduser('~') + '/.logs/httplog.log',
             'formatter': 'simple'
         },
         'detail': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/httplog.log.detail',
+            'filename': os.path.expanduser('~') + '/.logs/httplog.log.detail',
             'formatter': 'simple'
         },
     },
@@ -53,7 +53,7 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
-__VERSION__ = '1.3'
+__VERSION__ = '1.4'
 
 try:
     from httplog import patcher

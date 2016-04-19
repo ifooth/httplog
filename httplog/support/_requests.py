@@ -5,6 +5,7 @@
 """
 from __future__ import absolute_import
 import logging
+import json
 
 from requests import sessions, models
 
@@ -65,5 +66,6 @@ class Session(sessions.Session):
             verify=verify,
             cert=cert,
             json=json)
-        LOG_RESP.info('Resp(%s): %s' % (response.status_code, response.text))
+        #content = json.dumps(json.loads(response.text))
+        LOG_RESP.info('Resp(%s): %s' % (response.status_code, response.text.decode("unicode-escape")))
         return response
