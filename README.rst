@@ -7,9 +7,12 @@ HTTP LOG
 -----------
 1. pip install httplog
 
-使用
+使用sitecustomize.py
 --------------
 ```python
+import sys
+sys.setdefaultencoding('utf-8') # set default encoding as 'utf-8'
+
 try:
     import httplog
     httplog.monkey_patch()
