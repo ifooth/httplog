@@ -13,9 +13,5 @@ HTTP LOG
 import sys
 sys.setdefaultencoding('utf-8') # set default encoding as 'utf-8'
 
-try:
-    import httplog
-    httplog.monkey_patch()
-except:
-    pass
+import httplog
 ```

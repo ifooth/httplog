@@ -53,11 +53,7 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
-__VERSION__ = '1.6'
+__VERSION__ = '1.7'
 
-try:
-    from httplog import patcher
-    monkey_patch = patcher.monkey_patch
-except Exception as error:
-    import traceback
-    traceback.print_exc()
+from httplog import patcher
+patcher.monkey_patch()
