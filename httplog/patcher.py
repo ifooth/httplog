@@ -11,6 +11,8 @@ def patch_httplib2():
         import httplib2
         from httplog.support._httplib2 import Http
         httplib2.Http = Http
+    except ImportError:
+        pass
     except Exception:
         traceback.print_exc()
 
@@ -20,6 +22,9 @@ def patch_requests():
         import requests
         from httplog.support._requests import Session
         requests.sessions.Session = Session
+        requests.Session = Session
+    except ImportError:
+        pass
     except Exception:
         traceback.print_exc()
 

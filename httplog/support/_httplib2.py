@@ -5,7 +5,6 @@
 """
 from __future__ import absolute_import
 import logging
-import json
 
 import httplib2
 
@@ -26,6 +25,5 @@ class Http(httplib2.Http):
         response, content = super(Http, self).request(
             uri, method, body, headers, redirections,
             connection_type, **kwargs)
-        #content = json.dumps(json.loads(content), ensure_ascii=False)
         LOG_RESP.info('Resp(%s): %s' % (response.status, content.decode("unicode-escape")))
         return (response, content)

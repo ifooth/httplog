@@ -5,67 +5,24 @@
 """
 from __future__ import absolute_import
 import logging
-import json
 
-from requests import sessions, models
+from requests import sessions
 
 LOG_REQ = logging.getLogger('HTTP_REQ')
 LOG_RESP = logging.getLogger('HTTP_RESP')
 
 
 class Session(sessions.Session):
-    def request(self, method, url,
-                params=None,
-                data=None,
-                headers=None,
-                cookies=None,
-                files=None,
-                auth=None,
-                timeout=None,
-                allow_redirects=True,
-                proxies=None,
-                hooks=None,
-                stream=None,
-                verify=None,
-                cert=None,
-                json=None):
+    def request(self, *args, **kwargs):
         """添加LOG
         """
-        req = models.Request(
-            method=method.upper(),
-            url=url,
-            headers=headers,
-            files=files,
-            data=data or {},
-            json=json,
-            params=params or {},
-            auth=auth,
-            cookies=cookies,
-            hooks=hooks,
-        )
-        prep = self.prepare_request(req)
-
+        response = super(Session, self).request(*args, **kwargs)
+        prep = response.request
         if prep.method in ['GET']:
             LOG_REQ.info("curl -X %s '%s'" % (prep.method, prep.url))
         else:
             LOG_REQ.info("curl -X %s '%s' -d '%s'" % (
                 prep.method, prep.url, prep.body))
-        response = super(Session, self).request(
-            method, url,
-            params=params,
-            data=data,
-            headers=headers,
-            cookies=cookies,
-            files=files,
-            auth=auth,
-            timeout=timeout,
-            allow_redirects=allow_redirects,
-            proxies=proxies,
-            hooks=hooks,
-            stream=stream,
-            verify=verify,
-            cert=cert,
-            json=json)
-        #content = json.dumps(json.loads(response.text))
+
         LOG_RESP.info('Resp(%s): %s' % (response.status_code, response.text.decode("unicode-escape")))
         return response
