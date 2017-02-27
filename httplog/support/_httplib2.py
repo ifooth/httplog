@@ -13,17 +13,17 @@ LOG_RESP = logging.getLogger('HTTP_RESP')
 
 
 class Http(httplib2.Http):
-    def request(self, uri, method="GET", body=None, headers=None,
-                redirections=httplib2.DEFAULT_MAX_REDIRECTS,
-                connection_type=None, **kwargs):
+    def request(self, *args, **kwargs):
         """添加LOG
         """
+        uri = args[0]
+        method = args[1]
+        body = kwargs.get('body')
         if body:
             LOG_REQ.info("curl -X %s '%s' -d '%s' " % (method, uri, body))
         else:
             LOG_REQ.info("curl -X %s '%s'" % (method, uri))
-        response, content = super(Http, self).request(
-            uri, method, body, headers, redirections,
-            connection_type, **kwargs)
+
+        response, content = super(Http, self).request(*args, **kwargs)
         LOG_RESP.info('Resp(%s): %s' % (response.status, content.decode("unicode-escape")))
         return (response, content)

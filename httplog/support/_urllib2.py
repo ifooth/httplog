@@ -14,12 +14,15 @@ def http_log_wraper(open_func):
     """urlopen装饰器
     """
     @wraps(open_func)
-    def _wrapped_view(url, data=None, **kwargs):
+    def _wrapped_view(*args, **kwargs):
+        url = args[0]
+        data = kwargs.get('data')
         if data:
             LOG_REQ.info("curl -X POST '%s' -d '%s'" % (url, data))
         else:
             LOG_REQ.info("curl -X GET '%s'" % url)
-        resp = open_func(url, data, **kwargs)
+
+        resp = open_func(*args, **kwargs)
         content = resp.read()
         LOG_RESP.info('RESP(%s) %s' % (resp.code, content.decode("unicode-escape")))
         resp.read = lambda: content
