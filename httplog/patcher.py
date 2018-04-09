@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*
-# Copyright 2015 Tencent
-# Author: Joe Lei <joelei@tencent.com>
+# -*- coding: utf-8 -*-
+# Copyright 2018 IFOOTH
+# Author: Joe Lei <thezero12@hotmail.com>
 """monkey patch"""
 import sys
 import traceback
