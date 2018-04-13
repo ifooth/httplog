@@ -12,12 +12,14 @@
 文件路径：`python -m site --user-site`
 
 ```python
-import httplog
+from httplog import patcher
+patcher.monkey_patch()
 ```
 
 ### 项目替换
 单个项目替换，如django项目开发默认下，在manage.py中添加下面代码
 
 ```python
-import httplog
+from httplog import patcher
+patcher.monkey_patch()
 ```
