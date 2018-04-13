@@ -18,36 +18,19 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        'smart_req': {
+        'httplog': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.expanduser('~') + '/httplog.log',
             'formatter': 'simple'
-        },
-        'smart_resp': {
-            'level': 'DEBUG',
-            'class': 'httplog.log.SmartRespHandler',
-            'filename': os.path.expanduser('~') + '/httplog.log',
-            'formatter': 'simple'
-        },
-        'detail': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.expanduser('~') + '/httplog.log.detail',
-            'formatter': 'simple'
-        },
+        }
     },
     'loggers': {
         'httplog': {
-            'handlers': ['detail', 'smart_req'],
+            'handlers': ['httplog'],
             'level': 'DEBUG',
             'propagate': True,
-        },
-        'HTTP_RESP': {
-            'handlers': ['detail', 'smart_resp'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
+        }
     }
 }
 
