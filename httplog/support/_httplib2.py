@@ -4,26 +4,29 @@
 """httplib2支持
 """
 from __future__ import absolute_import
+
 import logging
+import time
 
 import httplib2
 
-LOG_REQ = logging.getLogger('HTTP_REQ')
-LOG_RESP = logging.getLogger('HTTP_RESP')
+logger = logging.getLogger(__name__)
 
 
 class Http(httplib2.Http):
     def request(self, *args, **kwargs):
         """添加LOG
         """
-        uri = args[0]
-        method = args[1]
+        st = time.time()
+
         body = kwargs.get('body')
+        curl_req = "REQ: curl -X {method} '{url}'".format(method=args[1], url=args[0])
         if body:
-            LOG_REQ.info("curl -X %s '%s' -d '%s' " % (method, uri, body))
-        else:
-            LOG_REQ.info("curl -X %s '%s'" % (method, uri))
+            curl_req += " -d '{body}'".format(body=body)
 
         response, content = super(Http, self).request(*args, **kwargs)
-        LOG_RESP.info('Resp(%s): %s' % (response.status, content.decode("unicode-escape")))
+        curl_resp = 'RESP: [%s] %.2fms %s' % (response.status, (time.time() - st) * 1000, content)
+
+        logger.info('httplib2 - \n\t%s\n\t%s', curl_req, curl_resp)
+
         return (response, content)

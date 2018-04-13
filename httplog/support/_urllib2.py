@@ -3,11 +3,12 @@
 # Author: Joe Lei <thezero12@hotmail.com>
 """urllib2 urlopen支持"""
 from __future__ import absolute_import
-from functools import wraps
-import logging
 
-LOG_REQ = logging.getLogger('HTTP_REQ')
-LOG_RESP = logging.getLogger('HTTP_RESP')
+import logging
+import time
+from functools import wraps
+
+logger = logging.getLogger(__name__)
 
 
 def http_log_wraper(open_func):
@@ -15,16 +16,20 @@ def http_log_wraper(open_func):
     """
     @wraps(open_func)
     def _wrapped_view(*args, **kwargs):
+        st = time.time()
         url = args[0]
         data = kwargs.get('data')
         if data:
-            LOG_REQ.info("curl -X POST '%s' -d '%s'" % (url, data))
+            curl_req = "REQ: curl -X POST '%s' -d '%s'" % (url, data)
         else:
-            LOG_REQ.info("curl -X GET '%s'" % url)
+            curl_req = "REQ: curl -X GET '%s'" % url
 
         resp = open_func(*args, **kwargs)
         content = resp.read()
-        LOG_RESP.info('RESP(%s) %s' % (resp.code, content.decode("unicode-escape")))
+
+        curl_resp = 'RESP: [%s] %.2fms %s' % (resp.code, (time.time() - st) * 1000, content)
+        logger.info('urllib2 - \n\t%s\n\t%s', curl_req, curl_resp)
+
         resp.read = lambda: content
         return resp
     return _wrapped_view
