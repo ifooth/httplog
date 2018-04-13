@@ -20,7 +20,14 @@ class Http(httplib2.Http):
         st = time.time()
 
         body = kwargs.get('body')
-        curl_req = "REQ: curl -X {method} '{url}'".format(method=args[1], url=args[0])
+        url = args[0]
+
+        if len(args) == 1:
+            method = 'GET'
+        else:
+            method = args[1]
+
+        curl_req = "REQ: curl -X {method} '{url}'".format(method=method, url=url)
         if body:
             curl_req += " -d '{body}'".format(body=body)
 
