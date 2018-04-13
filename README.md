@@ -3,7 +3,7 @@
 *urllib2 httplib2 requests日志小工具*
 
 ### 安装方法
-1. pip install httplog
+1. pip install http-log
 
 ### 全局替换
 
