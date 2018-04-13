@@ -38,7 +38,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'HTTP_REQ': {
+        'httplog': {
             'handlers': ['detail', 'smart_req'],
             'level': 'DEBUG',
             'propagate': True,
@@ -53,7 +53,4 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
-__VERSION__ = '1.7'
-
-from httplog import patcher
-patcher.monkey_patch()
+__VERSION__ = '1.8'

@@ -6,11 +6,11 @@ from setuptools import setup, find_packages
 # Dynamically calculate the version based on autoscan.__VERSION__
 version = __import__('httplog').__VERSION__
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as fh:
+with open(os.path.join(os.path.dirname(__file__), 'README.md')) as fh:
     long_description = fh.read()
 
 setup(
-    name="httplog",
+    name="http-log",
     version=version,
     description='httplog',
     long_description=long_description,
