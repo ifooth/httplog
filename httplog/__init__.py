@@ -36,4 +36,4 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
-__VERSION__ = '1.8'
+__VERSION__ = '1.9'

@@ -17,10 +17,10 @@ setup(
     packages=find_packages(),
     # metadata for upload to PyPI
     author="Joe Lei",
-    author_email='joelei@tencent.com',
+    author_email='thezero12@hotmail.com',
     license='Tencent license',
     keywords='httplog',
-    url='http://pypi.o.tencent.com',
+    url='https://github.com/ifooth/httplog',
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
