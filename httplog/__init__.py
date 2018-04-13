@@ -4,6 +4,10 @@
 import logging.config
 import os.path
 
+from httplog import patcher
+
+monkey_patch = patcher.monkey_patch
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -36,4 +40,5 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
-__VERSION__ = '1.9'
+
+__VERSION__ = '1.20'
