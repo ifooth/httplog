@@ -4,11 +4,14 @@
 """monkey patch"""
 import traceback
 
+from httplog.support.httplib2 import Http
+from httplog.support.requests import Session
+from httplog.support.urllib2 import http_log_wraper
+
 
 def patch_httplib2():
     try:
         import httplib2
-        from httplog.support._httplib2 import Http
         httplib2.Http = Http
     except ImportError:
         pass
@@ -19,7 +22,6 @@ def patch_httplib2():
 def patch_requests():
     try:
         import requests
-        from httplog.support._requests import Session
         requests.sessions.Session = Session
         requests.Session = Session
     except ImportError:
@@ -31,7 +33,6 @@ def patch_requests():
 def patch_urlopen():
     try:
         import urllib2
-        from httplog.support._urllib2 import http_log_wraper
         urllib2.urlopen = http_log_wraper(urllib2.urlopen)
     except Exception:
         traceback.print_exc()
