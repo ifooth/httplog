@@ -2,7 +2,6 @@
 # Copyright 2018 IFOOTH
 # Author: Joe Lei <thezero12@hotmail.com>
 """monkey patch"""
-import sys
 import traceback
 
 
@@ -45,11 +44,3 @@ def monkey_patch(httplib2=True, requests=True, urlopen=True):
         patch_requests()
     if urlopen:
         patch_urlopen()
-
-
-if __name__ == "__main__":
-    sys.argv.pop(0)
-    monkey_patch()
-    with open(sys.argv[0]) as f:
-        code = compile(f.read(), sys.argv[0], 'exec')
-        exec(code)
