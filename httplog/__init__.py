@@ -7,4 +7,4 @@ from httplog import patcher
 monkey_patch = patcher.monkey_patch
 
 
-__VERSION__ = '1.20'
+__VERSION__ = '2.0'
