@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright 2018 IFOOTH
-# Author: Joe Lei <thezero12@hotmail.com>
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
